@@ -22,7 +22,6 @@
       "@models/*": ["src/app/models/*"],
       "@repositories/*": ["src/app/repositories/*"],
       "@services/*": ["src/app/services/*"],
-      "@routes/*": ["src/app/routes/*"],
       "@lib/*": ["src/app/lib/*"]
     },
     "outDir": "./dist"

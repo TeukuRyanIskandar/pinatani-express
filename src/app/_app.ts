@@ -1,7 +1,7 @@
-import { router } from "@routes/_routes";
 import express from "express";
 import morgan from "morgan";
 import "reflect-metadata";
+import { router } from "./_routes";
 import { logger } from "./lib/utils";
 const app = express();
 
