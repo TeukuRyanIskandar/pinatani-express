@@ -8,16 +8,16 @@ import { httpService } from "../lib/utils/http";
 
 export class UserController {
   private readonly userService: UserService;
-  public router: Router;
+  public routes: Router;
   private initializeRoutes() {
-    this.router.post("/create", this.createUser);
-    this.router.get("/:id", this.getUserById);
+    this.routes.post("/create", this.createUser);
+    this.routes.get("/:id", this.getUserById);
     // Add more routes here as needed
   }
 
   constructor() {
     this.userService = new UserService();
-    this.router = Router();
+    this.routes = Router();
     this.initializeRoutes();
   }
 
