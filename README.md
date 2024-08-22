@@ -6,9 +6,9 @@ Description of the project.
 
 ## How to run locally?
 
-1. Install dependencies by running `npm run install`
-2. Make sure you have docker installed and running on your machine
-3. Run developement: `npm run dev`
+1. Install dependencies by running `npm install`
+2. Make sure you have Docker installed and running on your machine.
+3. Run development: `npm run dev`
 
 ## Scripts
 
@@ -16,8 +16,12 @@ Description of the project.
   - Start the compiled server.
 - **build**: `swc src --out-dir dist`
   - Compile TypeScript files using SWC.
-- **dev**: `npm-run-all --parallel dev:node dev:build`
-  - Run development tasks in parallel.
+- **dev**: `npm-run-all dev:start-db dev:start-server`
+  - Run development tasks sequentially for starting the database and the server.
+- **dev:start-db**: `npm-run-all docker:up migration:run`
+  - Start Docker containers and run pending migrations.
+- **dev:start-server**: `npm-run-all --parallel dev:node dev:build`
+  - Start the server and continuously compile files in watch mode using SWC in parallel.
 - **dev:node**: `node -r @swc-node/register --watch ./src/server.ts`
   - Start the server in watch mode using SWC for TypeScript support.
 - **dev:build**: `npm run build --watch`
@@ -53,6 +57,14 @@ Description of the project.
   - Hot-reloading for TypeScript Node.js applications.
 - **typeorm**: `^0.3.20`
   - ORM for TypeScript and JavaScript (ES7, ES6, ES5).
+- **dotenv**: `^16.4.5`
+  - Loads environment variables from a `.env` file into `process.env`.
+- **morgan**: `^1.10.0`
+  - HTTP request logger middleware for Node.js.
+- **chalk**: `^4.1.2`
+  - Terminal string styling done right.
+- **winston**: `^3.14.2`
+  - A logger for just about everything.
 
 ## Dev Dependencies
 
@@ -64,6 +76,8 @@ Description of the project.
   - SWC core library.
 - **@types/express**: `^4.17.21`
   - TypeScript definitions for Express.
+- **@types/morgan**: `^1.9.9`
+  - TypeScript definitions for Morgan.
 - **@types/node**: `^20.8.6`
   - TypeScript definitions for Node.js.
 - **chokidar**: `^3.6.0`
@@ -72,6 +86,10 @@ Description of the project.
   - JavaScript bundler and minifier.
 - **npm-run-all**: `^4.1.5`
   - CLI tool to run multiple npm-scripts in parallel or sequentially.
+- **prettier**: `^3.3.3`
+  - An opinionated code formatter.
+- **prettier-plugin-organize-imports**: `^4.0.0`
+  - A Prettier plugin to organize imports.
 - **tsconfig-paths**: `^4.2.0`
   - TypeScript path mapping for Node.js.
 - **typescript**: `^5.2.2`
