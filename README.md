@@ -2,7 +2,7 @@
 
 ## Project Description
 
-Description of the project.
+HTTP server for Pinatani
 
 ## How to run locally?
 
