@@ -5,3 +5,8 @@ export type CreateUserDto = {
   firstName?: string;
   lastName?: string;
 };
+
+export type CreateUserResData = {
+  username: string;
+  email: string;
+} | null;

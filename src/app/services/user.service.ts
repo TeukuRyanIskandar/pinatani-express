@@ -1,11 +1,19 @@
-import { CreateUserDto } from "@lib/types";
+import {
+  CreateUserDto,
+  CreateUserResData,
+} from "@lib/types";
 import { httpService } from "@lib/utils";
 import { userRepository } from "@repositories/user.repository";
 import type { Request, Response } from "express";
-import { BaseService } from "./base.service";
+import { BaseService } from "./_services";
+import { HttpService } from "./http.service";
 
 export class UserService extends BaseService {
   async createUser(req: Request, res: Response) {
+    // TODO: replace httpService util with sendResponse from HttpService
+    const sendResponse =
+      new HttpService<CreateUserResData>().sendResponse;
+
     /** TODO:
      * - improve validation
      * - hash password
