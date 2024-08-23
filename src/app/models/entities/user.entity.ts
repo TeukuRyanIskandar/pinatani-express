@@ -1,3 +1,4 @@
+import { User as TUser } from "@lib/types";
 import {
   Column,
   Entity,
@@ -5,7 +6,7 @@ import {
 } from "typeorm";
 
 @Entity({ name: "users" })
-export class User {
+export class User implements TUser {
   @PrimaryGeneratedColumn({ type: "int" })
   id: number;
 

@@ -3,10 +3,11 @@ import {
   CreateUserResData,
 } from "@lib/types";
 import { httpService } from "@lib/utils";
+import { createUserSchema } from "@models/schema";
 import { userRepository } from "@repositories/user.repository";
 import type { Request, Response } from "express";
-import { BaseService } from "./_services";
-import { HttpService } from "./http.service";
+import { z } from "zod";
+import { BaseService, HttpService } from "./_services";
 
 export class UserService extends BaseService {
   async createUser(req: Request, res: Response) {
@@ -19,17 +20,10 @@ export class UserService extends BaseService {
      * - hash password
      */
     try {
-      const createUserDto: CreateUserDto = req.body;
-      const { email, password, username } = createUserDto;
+      const createUserDto: CreateUserDto =
+        createUserSchema.parse(req.body);
 
-      if (!email || !password || !username) {
-        return httpService(res, {
-          code: 400,
-          data: null,
-          message:
-            "Email, password, and username are required",
-        });
-      }
+      const { email, username } = createUserDto;
 
       const existingUser = await userRepository.findOne({
         where: [{ email }, { username }],
@@ -45,6 +39,7 @@ export class UserService extends BaseService {
 
       const newUser =
         await userRepository.save(createUserDto);
+
       return httpService(res, {
         code: 201,
         data: {
@@ -55,6 +50,17 @@ export class UserService extends BaseService {
       });
     } catch (error) {
       this.logError(error as Error, "createUser");
+
+      if (error instanceof z.ZodError) {
+        return sendResponse(res, {
+          code: 400,
+          data: null,
+          message: error.errors
+            .map((e) => e.message)
+            .join(", "),
+        });
+      }
+
       throw error;
     }
   }
