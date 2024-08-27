@@ -1,5 +1,6 @@
 import {
   Table,
+  TableForeignKey,
   type MigrationInterface,
   type QueryRunner,
 } from "typeorm";
@@ -37,18 +38,40 @@ export class Initialize1719469344262
             isUnique: true,
           },
           {
-            name: "firstName",
-            type: "varchar",
-            length: "50",
+            name: "createdAt",
+            type: "timestampz",
+            precision: 3,
+            default: "now()",
+          },
+          {
+            name: "updatedAt",
+            type: "timestampz",
+            precision: 3,
+            default: "now()",
+          },
+          {
+            name: "deletedAt",
+            type: "timestampz",
+            precision: 3,
             isNullable: true,
           },
           {
-            name: "lastName",
-            type: "varchar",
-            length: "50",
-            isNullable: true,
+            name: "profileId",
+            type: "int",
+            isUnique: true,
           },
         ],
+      }),
+    );
+
+    await queryRunner.createForeignKey(
+      "users",
+      new TableForeignKey({
+        columnNames: ["profileId"],
+        referencedColumnNames: ["id"],
+        referencedTableName: "user_profile",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
       }),
     );
   }

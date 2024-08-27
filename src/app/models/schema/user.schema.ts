@@ -25,4 +25,10 @@ export const createUserSchema: z.ZodSchema<CreateUserDto> =
         message:
           "Password must be at least 6 characters long",
       }),
+
+    createdAt: z.date(),
+
+    updatedAt: z.date(),
+
+    deletedAt: z.date(),
   });
