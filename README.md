@@ -38,6 +38,7 @@ HTTP server for Pinatani
   - Run TypeORM CLI commands.
 - **migration:generate**: `npm run typeorm -- migration:generate -n`
   - Generate a new migration with TypeORM.
+  - example use: `npm run migration:generate --filename=migrationName`
 - **migration:run**: `npm run typeorm -- migration:run -d ./ormconfig.ts`
   - Run pending migrations with TypeORM.
 - **migration:revert**: `npm run typeorm -- migration:revert -d ./ormconfig.ts`
