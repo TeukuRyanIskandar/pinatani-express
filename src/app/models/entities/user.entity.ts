@@ -1,5 +1,5 @@
 import { User as TUser } from "@lib/types";
-import { UserProfile } from "@repositories/userProfile.repository";
+import { UserProfile } from "@models/entities/_entities";
 import {
   Column,
   CreateDateColumn,

@@ -1,4 +1,4 @@
-import { User } from "@repositories/user.repository";
+import { User } from "@models/entities/_entities";
 import {
   Column,
   Entity,
@@ -6,7 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 
-@Entity({ name: "user_profile" })
+@Entity({ name: "user_profiles" })
 export class UserProfile {
   @PrimaryGeneratedColumn({ type: "int" })
   profileId: number;
